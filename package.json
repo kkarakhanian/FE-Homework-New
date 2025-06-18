@@ -1,7 +1,7 @@
 {
-  "name": "hw-21",
+  "name": "hw-22",
   "version": "1.0.0",
-  "description": "new branch with hw-21",
+  "description": "my new homework",
   "main": "index.js",
   "dependencies": {
     "acorn": "^8.15.0",
@@ -215,13 +215,12 @@
     "url": "git+https://github.com/kkarakhanian/FE-Homework-New.git"
   },
   "keywords": [
+    "my",
     "new",
     "hw",
-    "21",
-    "fubction",
-    "js"
+    "22"
   ],
-  "author": "Karen K",
+  "author": "Karen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kkarakhanian/FE-Homework-New/issues"
