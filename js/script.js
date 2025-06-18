@@ -1,23 +1,12 @@
 'use strict';
 
-const arr = [1, 2, 3, -1, -2, -3];
-
-const homeArr = (arr) => {
-  const newArr = [];
-  if (arr.length === 0) {
-    return "It's an empty array!";
+const removeElement = (array, item) => {
+  const index = array.indexOf(item);
+  if (index !== -1) {
+    array.splice(index, 1);
   }
+};
 
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] > 0) {
-      newArr.push(arr[i]);
-    }
-  }
-      if (newArr.length > 0) {
-        return newArr;
-      } else {
-        return null;
-      }
-}
-
-console.log(homeArr(arr));
+const array = [1, 2, 3, 4, 5, 6, 7];
+removeElement(array, 5);
+console.log(array);
