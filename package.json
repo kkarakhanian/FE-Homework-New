@@ -1,7 +1,7 @@
 {
-  "name": "hw-23",
+  "name": "hw-24",
   "version": "1.0.0",
-  "description": "new hw 23",
+  "description": "New branch wit hw functions",
   "main": "index.js",
   "dependencies": {
     "acorn": "^8.15.0",
@@ -217,7 +217,8 @@
   "keywords": [
     "new",
     "hw",
-    "23"
+    "functions",
+    "24"
   ],
   "author": "Karen K",
   "license": "ISC",
