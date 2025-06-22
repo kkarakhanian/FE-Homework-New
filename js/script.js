@@ -1,91 +1,34 @@
 'use strict';
 
-//Task 1
-const averageOfNumbers = (arr) => {
-  let sum = 0;
-  let numberOfElements = 0;
-  for (let i = 0; i < arr.length; i++) {
-    const elements = arr[i];
-    if (typeof elements === 'number' && !isNaN(elements)) {
-      sum += elements;
-      numberOfElements++;
+const newFunc = (arr) => {
+    if (arr.length === 0) {
+        return undefined;
     }
-  }
-    if (numberOfElements === 0) {
-      console.error('Number of elements must be greater than 0');
-    } else {
-      return  sum / numberOfElements;
+    const firstElement = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        arr[i - 1] = arr[i];
     }
-};
-
-const arr= [10, "hello", true, 20, null, 30, undefined, {a: 1}, [5, 6]];
-console.log(averageOfNumbers(arr));
-
-//Task 2
-
-const doMath = (x, znak, y) => {
-  switch (znak) {
-    case '+':
-      return x + y;
-      break;
-    case '-':
-      return x - y;
-      break;
-    case '*':
-      return x * y;
-      break;
-    case '/':
-      return y !== 0 ? x / y : "Dividing by zero!";
-      break;
-    case '%':
-      return x % y;
-      break;
-    case '^':
-      return Math.pow(x, y);
-      break;
-  }
-};
- const x = +prompt('Please enter first number');
- const znak = prompt('Enter an operator: +, -, *, /, %, ^');
- const y = +prompt('Please enter a second number');
- console.log(doMath( x, znak, y));
-
-//Task 3
-const created2DArrayFromUserInput = () => {
-  const numberOfRows = +prompt('Please enter rows number');
-  const cols = +prompt('Enter the number of elements in each row (internal array)');
-  let mainArr = [];
-
-  if (numberOfRows === 0 || numberOfRows <= 0) {
-    alert('Please enter a a real positive number');
-    return null;
-  }
-  for (let i = 0; i < numberOfRows; i++) {
-    const currentRow = [];
-    for (let j = 0; j < numberOfRows; j++) {
-      const value = prompt(`Enter the element for position [${i}][${j}]:`);
-      currentRow.push(value);
-    }
-    mainArr.push(currentRow);
-  }
-  return mainArr;
-}
-const userArray = created2DArrayFromUserInput();
-console.log(userArray);
-
-//Task 4
-const deleteSymbols = (mainStr, charsToRemove) => {
-  let result = '';
-  for (let i = 0; i < mainStr.length; i++) {
-    const char = mainStr[i];
-    if (!charsToRemove.includes(char)) {
-      result += char;
-    }
-  }
-  return result;
+    arr = arr.length - 1;
+    return firstElement;
 }
 
-const mainStr = prompt('Enter two words');
-const charsToRemove = prompt('Enter the chars you want to remove');
-console.log(deleteSymbols(mainStr, charsToRemove));
+const arr1 = [1, 2, 3, 4, 5];
+const removed1 = newFunc(arr1);
+console.log(removed1, arr1);
 
+
+const newFunc2 = (arr) => {
+    let leftIndex = 0;
+    let rightIndex = arr.length - 1;
+    while (leftIndex < rightIndex) {
+        let temp = arr[leftIndex];
+        arr[leftIndex] = arr[rightIndex];
+        arr[rightIndex] = temp;
+        leftIndex++;
+        rightIndex--;
+    }
+}
+
+    let arr2 = [1, 2, 3, 4, 5];
+    console.log(arr2);
+    newFunc2(arr2);
