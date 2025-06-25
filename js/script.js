@@ -1,148 +1,94 @@
 'use strict';
 
-const arr = [16,-37,54,-4,72,-56,47,4,-16,25,-37,46,4,-51,27,-63,4,-54,76,-4,12,-35,4,47]
-
-//1
-const sumAndPositive = (arr) => {
-    let sum = 0;
-    let amount = 0;
+//indexOf
+const findFirstIndex = (arr, key) => {
     for (let i = 0; i < arr.length; i++) {
-        const number = arr[i];
-
-        if (number > 0) {
-            sum += number;
-            amount += 1;
+        if (arr[i] === key) {
+            return i;
         }
     }
-    return { sum: sum, count: amount };
+    return -1;
 }
-const result = sumAndPositive(arr);
-console.log("Sum of positive elements:", result.sum);
-console.log("Amount of positives elements:", result.count);
+console.log(findFirstIndex([10, 20, 30, 20], 20));
+console.log(findFirstIndex([1, 2, 3], 5));
 
-
-//2
-const minElAndSequenceNum = (arr) => {
-    let minValue = arr[0];
-    let index = 0;
-    for (let i = 0; i < arr.length; i++) {
-        const currNum = arr[i];
-      if(arr[i] < minValue) {
-          minValue = arr[i];
-          index = i;
+//lastIndexOf
+const findLastIndex = (arr, key) => {
+    for (let i = arr.length - 1; i >= 0; i--) {
+        if (arr[i] === key) {
+            return i;
         }
     }
-    return { minValue, index };
+    return -1;
 }
-console.log(minElAndSequenceNum(arr));
+console.log(findLastIndex([10, 20, 30, 30], 30));
+console.log(findLastIndex([10, 20, 30, 30], 5));
 
-//3
-const maxElAndSequenceNum = (arr) => {
-    let maxValue = arr[0];
-    let index = 0;
+//find
+const find = (arr, callback) => {
     for (let i = 0; i < arr.length; i++) {
-        const currNum = arr[i];
-        if(arr[i] > maxValue) {
-            maxValue = arr[i];
-            index = i;
+        if (callback(arr[i], i, arr)) {
+            return arr[i];
         }
     }
-    return { maxValue, index };
+    return undefined;
 }
-console.log(maxElAndSequenceNum(arr));
+const nums = [3, 7, 10, 15];
 
-//4
-const negativeEl = (arr) => {
-    let count = 0;
+const found = find(nums, (el) => el > 8);
+console.log(found);
+
+//findIndex
+const findIndex = (arr, callback) => {
     for (let i = 0; i < arr.length; i++) {
-        const currNum = arr[i];
-
-        if(arr[i] < 0) {
-            count += 1;
+        if (callback(arr[i], i, arr)) {
+            return i;
         }
     }
-return count;
+    return -1;
 }
-console.log(negativeEl(arr));
+const numbers = [5, 12, 8, 130, 44];
 
-//5
-const neparAndPositive = (arr) => {
-    let finalCount = 0;
+const index = findIndex(numbers, (el) => el > 100);
+console.log(index);
+
+//includes
+const findIncludes = (arr, value) => {
     for (let i = 0; i < arr.length; i++) {
-        const potochniyNum = arr[i];
-
-        if(arr[i] > 0 && potochniyNum % 2 !== 0) {
-            finalCount += 1;
+        if (arr[i] === value) {
+            return true;
         }
     }
-    return finalCount;
+    return false;
 }
-console.log(neparAndPositive(arr));
+const arr = [1, 3, 5, 7];
+const valueToFind = 3;
 
-//6
-const parAndPositive = (arr) => {
-    let finalCount = 0;
+const result = findIncludes(arr, valueToFind);
+console.log(result);
+
+//every
+const every = (arr, callback) => {
     for (let i = 0; i < arr.length; i++) {
-        const potochniyNum = arr[i];
-
-        if(arr[i] > 0 && potochniyNum % 2 === 0) {
-            finalCount += 1;
+        if (!callback(arr[i], i, arr)) {
+            return false;
         }
     }
-    return finalCount;
+    return true;
 }
-console.log(parAndPositive(arr));
+const arr2 = [2, 3, 6, 8];
+console.log(every(arr2, (el) => el % 2 === 0));
 
-//7
-const sumOfParEl = (arr) => {
-    let sum = 0;
+//some
+const findSome = (arr, callback) => {
     for (let i = 0; i < arr.length; i++) {
-        const value = arr[i];
-
-        if(arr[i] > 0 && value % 2 === 0) {
-            sum += value;
+        if (callback(arr[i], i, arr)) {
+            return true;
         }
     }
-    return sum;
+    return false;
 }
-console.log(sumOfParEl(arr));
 
-//8
-const sumOfNeparEl = (arr) => {
-    let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-        const parValue = arr[i];
-
-        if(arr[i] > 0 && parValue % 2 !== 0) {
-            sum += parValue;
-        }
-    }
-    return sum;
-}
-console.log(sumOfNeparEl(arr));
-
-//9
-const dobOfPositive = (arr) => {
-    let sum = 1;
-    for (let i = 0; i < arr.length; i++) {
-        const zminna  = arr[i];
-
-        if(arr[i] > 0) {
-            sum *= zminna;
-        }
-    }
-    return sum;
-}
-console.log(dobOfPositive(arr));
-
-//10
-const findTheBiggest  = (arr) => {
-    let theBiggest = Math.max(...arr);
-    for (let i = 0; i < arr.length; i++) {
-        if(arr[i] !== theBiggest) {
-    arr[i] = 0;
-}
-    }
-    return arr;
-}
-console.log(findTheBiggest(arr));
+const arr3 = [1, 3, 5, 8];
+const hasEven = arr3.some((el) => el % 2 === 0);
+console.log(hasEven);
