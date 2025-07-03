@@ -1,24 +1,17 @@
 
-Напишіть функцію findValuesByKey(obj, targetKey), яка:
-* Приймає довільний вкладений об'єкт obj.
-* Повертає масив усіх значень, що відповідають ключу targetKey (ключ може з’являтися на будь-якому рівні вкладеності, й кілька разів).
+Є кілька «карток» товарів з атрибутом data-category (наприклад, "fruit", "vegetable"). Є селект з фільтрами. Коли користувач обирає категорію — показуються лише ті картки, що їй відповідають.
 
-Приклад
-const data = {
-id: 1,
-name: "root",
-meta: {
-id: 2,
-parent: {
-id: 3,
-name: "leaf",
-},
-},
-array: [
-{ id: 4 },
-{ name: "node", children: [{ id: 5 }] },
-],
-};
+<select id="filter">
+<option value="all">Усі</option>
+<option value="fruit">Фрукти</option>
+<option value="vegetable">Овочі</option>
+</select>
 
-findValuesByKey(data, "id");
-// ➜ [1, 2, 3, 4, 5]
+<div class="card" data-category="fruit">🍎 Яблуко</div>
+<div class="card" data-category="vegetable">🥕 Морква</div>
+<div class="card" data-category="fruit">🍌 Банан</div>
+
+Очікувані дії:
+
+* Реагувати на зміну в <select>
+* Перебирати .card і приховувати/показувати в залежності від data-category

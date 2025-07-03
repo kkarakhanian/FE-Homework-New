@@ -1,46 +1,18 @@
 'use strict';
 
 
-const findValuesByKey = (obj, targetKey) => {
-    const result =[];
+const select = document.getElementById('filter');
+const productCards = document.querySelectorAll('.card');
 
-    function search(currentObj) {
-        if (currentObj === null || typeof currentObj !== 'object') {
-            return;
-        }
-        if (!Array.isArray(currentObj)) {
-            for (const key in currentObj) {
-                if (Object.prototype.hasOwnProperty.call(currentObj, key)) {
-                    if (key === targetKey) {
-                        result.push(currentObj[key]);
-                    }
-                    search(currentObj[key]);
-                }
-            }
+select.addEventListener('change', function () {
+    const selectedValue = this.value;
+    for (const card of productCards) {
+        const cardCategory = card.dataset.category;
+        if (selectedValue === 'all' || cardCategory === selectedValue) {
+            card.classList.remove('hidden');
         } else {
-            for (const item of currentObj) {
-                search(item);
-            }
+            card.classList.add('hidden');
         }
     }
-    search(obj);
-    return result;
-}
-
-const data = {
-    id: 1,
-    name: "root",
-    meta: {
-        id: 2,
-        parent: {
-            id: 3,
-            name: "leaf",
-        },
-    },
-    array: [
-        { id: 4 },
-        { name: "node", children: [{ id: 5 }] },
-    ],
-};
-
-console.log(findValuesByKey(data, "id"));
+});
+select.dispatchEvent(new Event('change'));

@@ -4,23 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My first page</title>
-    <script src="./js/script.js"></script>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <header>
-    <h1>Wellcome</h1>
-</header>
+    <select id="filter">
+        <option value="all">Усі</option>
+        <option value="fruit">Фрукти</option>
+        <option value="vegetable">Овочі</option>
+    </select>
 
+    <div class="card" data-category="fruit">🍎 Яблуко</div>
+    <div class="card" data-category="vegetable">🥕 Морква</div>
+    <div class="card" data-category="fruit">🍌 Банан</div>
+</header>
 <main>
-    <div class="card">
         <h2>Easy HTML and CSS</h2>
         <p>It's an example</p>
-    </div>
 </main>
 
 <footer>
     2025 My new site
 </footer>
+<script src="./js/script.js"></script>
 </body>
 </html>
