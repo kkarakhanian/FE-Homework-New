@@ -1,8 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
+    color: #333;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -12,17 +14,43 @@ header {
     text-align: center;
 }
 
+#toggle-theme {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#toggle-theme:hover {
+    background-color: #0056b3;
+}
+
+#toggle-theme:active {
+    background-color: #004085;
+}
+
+#toggle-theme:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
 main {
     padding: 2rem;
 }
 
 .card {
     background-color: white;
+    color: #333;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     margin: 0 auto;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 footer {
@@ -31,4 +59,44 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-theme header {
+    background-color: #282828;
+    color: #f0f0f0;
+}
+
+body.dark-theme #toggle-theme {
+    background-color: #6200ee;
+    color: white;
+}
+
+body.dark-theme #toggle-theme:hover {
+    background-color: #3700b3;
+}
+
+body.dark-theme #toggle-theme:active {
+    background-color: #1a0066;
+}
+
+body.dark-theme #toggle-theme:focus {
+    box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.5);
+}
+
+body.dark-theme .card {
+    background-color: #282828;
+    color: #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme footer {
+    background-color: #0f0f0f;
+    color: #b0b0b0;
 }
