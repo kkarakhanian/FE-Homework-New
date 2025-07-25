@@ -8,19 +8,28 @@
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<header>
-    <h1>Welcome</h1>
-</header>
+<div class="container">
+    <h1>TODO LIST</h1>
 
-<main>
-    <div class="card">
-        <h2>Easy HTML and CSS</h2>
-        <p>It's an example</p>
-    </div>
-</main>
+    <form id="todo-form">
+        <div class="form-group">
+            <label for="title">Task title</label>
+            <input type="text" id="title" placeholder="Title" />
+        </div>
 
-<footer>
-    2025 My new site
-</footer>
+        <div class="form-group">
+            <label for="body">Task body</label>
+            <textarea id="body" placeholder="Task body"></textarea>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" class="btn blue">Create Task!</button>
+            <button type="button" id="clear-form" class="btn yellow">Очистить</button>
+            <button type="button" id="delete-all" class="btn red">Удалить все</button>
+        </div>
+    </form>
+
+    <ul id="task-list"></ul>
+</div>
 </body>
 </html>
