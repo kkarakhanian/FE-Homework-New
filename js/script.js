@@ -1,26 +1,39 @@
 "use strict";
 
-class HistoryTracker {
-    constructor() {
-        this.visited = [];
-        window.addEventListener('popstate', (event) => {
-            console.log('Popstate event:', event.state);
-            console.log('Actual history:', this.visited);
-        });
+class URLParser {
+    constructor(fullUrl) {
+        this.url = new URL(fullUrl);
     }
 
-    push(url) {
-        this.visited.push(url);
-        history.pushState({ url }, '', url);
-        console.log(`Added: ${url}`);
+    get protocol() {
+        return this.url.protocol;
     }
-    back() {
-        history.back();
+
+    get hostname() {
+        return this.url.hostname;
+    }
+
+    get path() {
+        return this.url.pathname;
+    }
+
+    get queryParams() {
+        const params = {};
+        for (const [key, value] of this.url.searchParams) {
+            params[key] = value;
+        }
+        return params;
     }
 }
 
-// Usage example
-const tracker = new HistoryTracker();
+// Example to use
+const parser = new URLParser("https://example.com/products/item?search=book&page=2");
+
+console.log(parser.protocol);    // "https:"
+console.log(parser.hostname);    // "example.com"
+console.log(parser.path);        // "/products/item"
+console.log(parser.queryParams); // { search: "book", page: "2" }
+
 
 
 
