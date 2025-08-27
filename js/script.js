@@ -1,38 +1,68 @@
 "use strict";
 
-class URLParser {
-    constructor(fullUrl) {
-        this.url = new URL(fullUrl);
+class Navigation {
+    constructor(menuSelector, contentSelector) {
+        this.menu = document.querySelector(menuSelector);
+        this.content = document.querySelector(contentSelector);
+
+        this.menu.addEventListener("click", (e) => this.onClick(e));
+        window.addEventListener("popstate", () => this.updateView());
+
+        this.updateView();
     }
 
-    get protocol() {
-        return this.url.protocol;
-    }
+    onClick(e) {
+        if (e.target.tagName === "A") {
+            e.preventDefault();
+            const url = e.target.getAttribute("href");
 
-    get hostname() {
-        return this.url.hostname;
-    }
+            // міняємо адресу через pushState
+            history.pushState({}, "", url);
 
-    get path() {
-        return this.url.pathname;
-    }
-
-    get queryParams() {
-        const params = {};
-        for (const [key, value] of this.url.searchParams) {
-            params[key] = value;
+            // оновлюємо вигляд
+            this.updateView();
         }
-        return params;
+    }
+
+    updateView() {
+        const path = window.location.pathname;
+
+        // прибираємо попередній active
+        this.menu.querySelectorAll("a").forEach((a) =>
+            a.classList.remove("active")
+        );
+
+        // підсвітка активного
+        const activeLink = this.menu.querySelector(`a[href="${path}"]`);
+        if (activeLink) activeLink.classList.add("active");
+
+        // проста симуляція контенту
+        this.renderContent(path);
+    }
+
+    renderContent(path) {
+        let html = "";
+        switch (path) {
+            case "/home":
+                html = "<h2>Welcome to Home</h2>";
+                break;
+            case "/about":
+                html = "<h2>About Us</h2><p>Some info...</p>";
+                break;
+            case "/contact":
+                html = "<h2>Contact Page</h2><p>Email us at contact@example.com</p>";
+                break;
+            default:
+                html = "<h2>404 Not Found</h2>";
+        }
+        this.content.innerHTML = html;
     }
 }
 
-// Example to use
-const parser = new URLParser("https://example.com/products/item?search=book&page=2");
 
-console.log(parser.protocol);    // "https:"
-console.log(parser.hostname);    // "example.com"
-console.log(parser.path);        // "/products/item"
-console.log(parser.queryParams); // { search: "book", page: "2" }
+document.addEventListener("DOMContentLoaded", () => {
+    new Navigation("nav ul", "#content");
+});
 
 
 
