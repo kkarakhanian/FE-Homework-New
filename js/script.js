@@ -16,10 +16,10 @@ class Navigation {
             e.preventDefault();
             const url = e.target.getAttribute("href");
 
-            // міняємо адресу через pushState
+
             history.pushState({}, "", url);
 
-            // оновлюємо вигляд
+
             this.updateView();
         }
     }
@@ -27,16 +27,13 @@ class Navigation {
     updateView() {
         const path = window.location.pathname;
 
-        // прибираємо попередній active
         this.menu.querySelectorAll("a").forEach((a) =>
             a.classList.remove("active")
         );
 
-        // підсвітка активного
         const activeLink = this.menu.querySelector(`a[href="${path}"]`);
         if (activeLink) activeLink.classList.add("active");
 
-        // проста симуляція контенту
         this.renderContent(path);
     }
 
