@@ -1,66 +1,78 @@
 "use strict";
 
-class Navigation {
-    constructor(menuSelector, contentSelector) {
-        this.menu = document.querySelector(menuSelector);
-        this.content = document.querySelector(contentSelector);
+const input = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const list = document.getElementById("taskList");
+const counter = document.getElementById("counter");
+const filterBtns = document.querySelectorAll(".filters button");
 
-        this.menu.addEventListener("click", (e) => this.onClick(e));
-        window.addEventListener("popstate", () => this.updateView());
+let filter = "all";
 
-        this.updateView();
-    }
-
-    onClick(e) {
-        if (e.target.tagName === "A") {
-            e.preventDefault();
-            const url = e.target.getAttribute("href");
-
-
-            history.pushState({}, "", url);
-
-
-            this.updateView();
-        }
-    }
-
-    updateView() {
-        const path = window.location.pathname;
-
-        this.menu.querySelectorAll("a").forEach((a) =>
-            a.classList.remove("active")
-        );
-
-        const activeLink = this.menu.querySelector(`a[href="${path}"]`);
-        if (activeLink) activeLink.classList.add("active");
-
-        this.renderContent(path);
-    }
-
-    renderContent(path) {
-        let html = "";
-        switch (path) {
-            case "/home":
-                html = "<h2>Welcome to Home</h2>";
-                break;
-            case "/about":
-                html = "<h2>About Us</h2><p>Some info...</p>";
-                break;
-            case "/contact":
-                html = "<h2>Contact Page</h2><p>Email us at contact@example.com</p>";
-                break;
-            default:
-                html = "<h2>404 Not Found</h2>";
-        }
-        this.content.innerHTML = html;
-    }
+function updateCounter() {
+    const all = list.querySelectorAll("li");
+    const completed = list.querySelectorAll("li.completed");
+    counter.textContent = `Active: ${all.length - completed.length} | Completed: ${completed.length}`;
 }
 
+function applyFilter() {
+    list.querySelectorAll("li").forEach(li => {
+        if (filter === "all") {
+            li.style.display = "";
+        } else if (filter === "active") {
+            li.style.display = li.classList.contains("completed") ? "none" : "";
+        } else if (filter === "completed") {
+            li.style.display = li.classList.contains("completed") ? "" : "none";
+        }
+    });
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-    new Navigation("nav ul", "#content");
+function createTask(text) {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    span.textContent = text;
+
+    const doneBtn = document.createElement("button");
+    doneBtn.textContent = "Done";
+    doneBtn.addEventListener("click", () => {
+        li.classList.toggle("completed");
+        updateCounter();
+        applyFilter();
+    });
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+    delBtn.addEventListener("click", () => {
+        li.remove();
+        updateCounter();
+    });
+
+    li.append(span, doneBtn, delBtn);
+    list.appendChild(li);
+
+    updateCounter();
+    applyFilter();
+}
+
+addBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (text) {
+        createTask(text);
+        input.value = "";
+    }
 });
 
+input.addEventListener("keypress", e => {
+    if (e.key === "Enter") addBtn.click();
+});
+
+filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        filter = btn.dataset.filter;
+        applyFilter();
+    });
+});
 
 
 
